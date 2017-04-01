@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WeatherApp
 {
-    class Core
+    public class Core
     {
         public static async Task<Weather> GetWeather(string zipCode)
         {
-            string apiKey = "";
+            string apiKey = "d0717209fc7a503ecc78f94f28bd089f";
             string queryString = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode + ",us&appid=" + apiKey + "&units=imperial";
 
             dynamic results = await DataService.getDataFromService(queryString).ConfigureAwait(false);

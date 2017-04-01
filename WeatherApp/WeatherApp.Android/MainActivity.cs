@@ -12,24 +12,38 @@ namespace WeatherApp.Droid
 	[Activity (Label = "WeatherApp.Android", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
-		int count = 1;
-
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
-
-			// Get our button from the layout resource,
-			// and attach an event to it
-			Button button = FindViewById<Button> (Resource.Id.myButton);
-			
-			button.Click += delegate {
-				button.Text = string.Format ("{0} clicks!", count++);
-			};
+            Button getWeatherButton = FindViewById<Button>(Resource.Id.GetWeatherButton);
+            getWeatherButton.Click += buttonClick;
 		}
-	}
+
+        private async void buttonClick(object sender, EventArgs e)
+        {
+            EditText zipCodeEntry = FindViewById<EditText>(Resource.Id.ZipCodeEntry);
+
+            if (String.IsNullOrEmpty(zipCodeEntry.Text))
+            {
+                Toast.MakeText(this, "One has to fill out the zipCode to get Weather", ToastLength.Long);
+            }
+            else
+            {
+                Weather weather = await Core.GetWeather(zipCodeEntry.Text);
+                FindViewById<TextView>(Resource.Id.locationText).Text = weather.Title;
+                FindViewById<TextView>(Resource.Id.tempText).Text = weather.Temperature;
+                FindViewById<TextView>(Resource.Id.windText).Text = weather.Wind;
+                FindViewById<TextView>(Resource.Id.visibilityText).Text = weather.Visibility;
+                FindViewById<TextView>(Resource.Id.humidityText).Text = weather.Humidity;
+                FindViewById<TextView>(Resource.Id.sunriseText).Text = weather.Sunrise;
+                FindViewById<TextView>(Resource.Id.sunsetText).Text = weather.Sunset;
+            }
+
+        }
+    }
 }
 
 
