@@ -28,8 +28,13 @@ namespace WeatherApp.Droid
 
             if (String.IsNullOrEmpty(zipCodeEntry.Text))
             {
-                Toast.MakeText(this, "One has to fill out the zipCode to get Weather", ToastLength.Long);
+                Toast.MakeText(this, "One has to fill out the zipCode to get Weather", ToastLength.Long).Show();
             }
+
+            else if(zipCodeEntry.Length()< 5){
+                Toast.MakeText(this, "A Standard US Zip Code is 5 digits long", ToastLength.Long).Show();
+            }
+
             else
             {
                 Weather weather = await Core.GetWeather(zipCodeEntry.Text);
