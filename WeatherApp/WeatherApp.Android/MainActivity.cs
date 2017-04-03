@@ -38,15 +38,32 @@ namespace WeatherApp.Droid
             else
             {
                 Weather weather = await Core.GetWeather(zipCodeEntry.Text);
-                FindViewById<TextView>(Resource.Id.locationText).Text = weather.Title;
-                FindViewById<TextView>(Resource.Id.tempText).Text = weather.Temperature;
-                FindViewById<TextView>(Resource.Id.windText).Text = weather.Wind;
-                FindViewById<TextView>(Resource.Id.visibilityText).Text = weather.Visibility;
-                FindViewById<TextView>(Resource.Id.humidityText).Text = weather.Humidity;
-                FindViewById<TextView>(Resource.Id.sunriseText).Text = weather.Sunrise;
-                FindViewById<TextView>(Resource.Id.sunsetText).Text = weather.Sunset;
+                checkWeatherData(weather);
             }
 
+        }
+
+        private void checkWeatherData(Weather pulledWeather)
+        {
+            if(pulledWeather == null)
+            {
+                Toast.MakeText(this, "OpenWeatherMap appears to not have that zip code in its database, please try again", ToastLength.Long).Show();
+            }
+            else
+            {
+                setWeatherDataToUI(pulledWeather);
+            }
+        }
+
+        private void setWeatherDataToUI(Weather pulledWeather)
+        {
+            FindViewById<TextView>(Resource.Id.locationText).Text = pulledWeather.Title;
+            FindViewById<TextView>(Resource.Id.tempText).Text = pulledWeather.Temperature;
+            FindViewById<TextView>(Resource.Id.windText).Text = pulledWeather.Wind;
+            FindViewById<TextView>(Resource.Id.visibilityText).Text = pulledWeather.Visibility;
+            FindViewById<TextView>(Resource.Id.humidityText).Text = pulledWeather.Humidity;
+            FindViewById<TextView>(Resource.Id.sunriseText).Text = pulledWeather.Sunrise;
+            FindViewById<TextView>(Resource.Id.sunsetText).Text = pulledWeather.Sunset;
         }
     }
 }
