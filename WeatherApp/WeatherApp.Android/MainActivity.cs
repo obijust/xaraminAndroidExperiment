@@ -31,7 +31,7 @@ namespace WeatherApp.Droid
                 Toast.MakeText(this, "One has to fill out the zipCode to get Weather", ToastLength.Long).Show();
             }
 
-            else if(zipCodeEntry.Length()< 5){
+            else if(zipCodeEntry.Length() != 5){
                 Toast.MakeText(this, "A Standard US Zip Code is 5 digits long", ToastLength.Long).Show();
             }
 

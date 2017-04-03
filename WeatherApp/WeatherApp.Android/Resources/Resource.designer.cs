@@ -75,11 +75,11 @@ namespace WeatherApp.Droid
 			// aapt resource value: 0x7f050005
 			public const int divider = 2131034117;
 			
+			// aapt resource value: 0x7f05000c
+			public const int humidityLabel = 2131034124;
+			
 			// aapt resource value: 0x7f05000d
 			public const int humidityText = 2131034125;
-			
-			// aapt resource value: 0x7f05000c
-			public const int humidtyLabel = 2131034124;
 			
 			// aapt resource value: 0x7f050006
 			public const int locationLabel = 2131034118;
